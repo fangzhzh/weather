@@ -5,6 +5,8 @@ import javax.inject.Singleton;
 import dagger.Component;
 import weather.fangzhzh.com.weather.data.UserComponent;
 import weather.fangzhzh.com.weather.data.UserModule;
+import weather.fangzhzh.com.weather.ui.activity.component.MainActivityComponent;
+import weather.fangzhzh.com.weather.ui.activity.module.MainActivityModule;
 
 /**
  * @author zhangzf
@@ -18,4 +20,5 @@ import weather.fangzhzh.com.weather.data.UserModule;
 )
 public interface AppComponent {
     UserComponent plus(UserModule userModule);
+    MainActivityComponent plus(MainActivityModule module);
 }

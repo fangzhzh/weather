@@ -20,16 +20,27 @@ android {
         }
     }
 }
+ext.androidAnnotationsVersion = '4.1.0';
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
+    // android
     compile 'com.android.support:appcompat-v7:24.2.1'
+    apt "org.androidannotations:androidannotations:${androidAnnotationsVersion}"
+
+    // java
+    compile 'javax.annotation:javax.annotation-api:1.2'
+    compile 'javax.inject:javax.inject:1'
     testCompile 'junit:junit:4.12'
 
     //Dagger 2
     compile 'com.google.dagger:dagger:2.4'
     apt 'com.google.dagger:dagger-compiler:2.4'
+
+
+    // rxjava
+    compile 'io.reactivex:rxjava:1.2.1'
 }
