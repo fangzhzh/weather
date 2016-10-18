@@ -1,11 +1,13 @@
 package weather.fangzhzh.com.weather.ui.activity.module;
 
+import com.squareup.okhttp.OkHttpClient;
+
 import dagger.Module;
 import dagger.Provides;
-import weather.fangzhzh.com.weather.data.UserModule;
+import weather.fangzhzh.com.weather.data.api.WeatherManager;
 import weather.fangzhzh.com.weather.ui.activity.ActivityScope;
 import weather.fangzhzh.com.weather.ui.activity.MainActivity;
-import weather.fangzhzh.com.weather.ui.activity.MainPresenter;
+import weather.fangzhzh.com.weather.ui.activity.presenter.MainPresenter;
 
 /**
  * @author zhangzf
@@ -26,8 +28,8 @@ public class MainActivityModule{
 
     @Provides
     @ActivityScope
-    MainPresenter provideMainPresenter() {
-        return new MainPresenter();
+    MainPresenter provideMainPresenter(MainActivity activity, WeatherManager weatherManager) {
+        return new MainPresenter(activity, weatherManager);
     }
 
 

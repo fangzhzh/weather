@@ -30,6 +30,7 @@ dependencies {
     // android
     compile 'com.android.support:appcompat-v7:24.2.1'
     apt "org.androidannotations:androidannotations:${androidAnnotationsVersion}"
+    compile "org.androidannotations:androidannotations-api:${androidAnnotationsVersion}"
 
     // java
     compile 'javax.annotation:javax.annotation-api:1.2'
@@ -43,4 +44,7 @@ dependencies {
 
     // rxjava
     compile 'io.reactivex:rxjava:1.2.1'
+
+    // squareup
+    compile 'com.squareup.okhttp:okhttp:2.5.0'
 }

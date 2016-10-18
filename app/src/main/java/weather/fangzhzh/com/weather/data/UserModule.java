@@ -1,7 +1,11 @@
 package weather.fangzhzh.com.weather.data;
 
+
+import com.squareup.okhttp.OkHttpClient;
+
 import dagger.Module;
 import dagger.Provides;
+import weather.fangzhzh.com.weather.data.api.WeatherManager;
 import weather.fangzhzh.com.weather.data.model.User;
 
 /**
@@ -20,4 +24,11 @@ public class UserModule {
     User provideUser() {
         return user;
     }
+
+    @Provides
+    @UserScope
+    WeatherManager provideWeatherManager(User user, OkHttpClient okHttpClient) {
+        return new WeatherManager(user, okHttpClient);
+    }
+
 }

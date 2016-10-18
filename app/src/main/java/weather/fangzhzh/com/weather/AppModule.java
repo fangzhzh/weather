@@ -2,6 +2,10 @@ package weather.fangzhzh.com.weather;
 
 import android.app.Application;
 
+import com.squareup.okhttp.OkHttpClient;
+
+import java.util.concurrent.TimeUnit;
+
 import javax.inject.Singleton;
 
 import dagger.Module;
@@ -22,5 +26,14 @@ public class AppModule {
     @Singleton
     public Application provideApplication() {
         return  application;
+    }
+
+    @Provides
+    @Singleton
+    public OkHttpClient provideOkHttpClient() {
+        OkHttpClient okhttpClient = new OkHttpClient();
+        okhttpClient.setConnectTimeout(30, TimeUnit.SECONDS);
+        return okhttpClient;
+
     }
 }

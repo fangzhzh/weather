@@ -2,12 +2,18 @@ package weather.fangzhzh.com.weather.ui.activity;
 
 import android.os.Bundle;
 
+import org.androidannotations.annotations.AfterViews;
+import org.androidannotations.annotations.EActivity;
+import org.androidannotations.annotations.EViewGroup;
+
 import javax.inject.Inject;
 
 import weather.fangzhzh.com.weather.R;
 import weather.fangzhzh.com.weather.WeatherApplication;
 import weather.fangzhzh.com.weather.ui.activity.module.MainActivityModule;
+import weather.fangzhzh.com.weather.ui.activity.presenter.MainPresenter;
 
+@EActivity(R.layout.activity_main)
 public class MainActivity extends BaseActivity {
 
     @Inject
@@ -16,7 +22,11 @@ public class MainActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+    }
+
+    @AfterViews
+    void onViewInit() {
+        presenter.loadWeathers();
     }
 
     @Override
