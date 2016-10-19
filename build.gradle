@@ -3,12 +3,16 @@
 buildscript {
     repositories {
         jcenter()
+        maven {
+            url 'http://oss.sonatype.org/content/repositories/snapshots'
+        }
     }
 
     dependencies {
         classpath 'com.android.tools.build:gradle:2.2.1'
         classpath 'com.neenbedankt.gradle.plugins:android-apt:1.8'
         classpath 'com.frogermcs.androiddevmetrics:androiddevmetrics-plugin:0.4'
+        classpath 'com.jakewharton.hugo:hugo-plugin:1.2.1'
         // in the individual module build.gradle files
     }
 }
@@ -16,6 +20,9 @@ buildscript {
 allprojects {
     repositories {
         jcenter()
+        maven {
+            url 'http://oss.sonatype.org/content/repositories/snapshots'
+        }
     }
 }
 

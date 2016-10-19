@@ -1,10 +1,11 @@
 package weather.fangzhzh.com.weather.ui.activity;
 
 import android.os.Bundle;
+import android.widget.TextView;
 
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.EActivity;
-import org.androidannotations.annotations.EViewGroup;
+import org.androidannotations.annotations.ViewById;
 
 import javax.inject.Inject;
 
@@ -16,12 +17,16 @@ import weather.fangzhzh.com.weather.ui.activity.presenter.MainPresenter;
 @EActivity(R.layout.activity_main)
 public class MainActivity extends BaseActivity {
 
+    @ViewById(R.id.days)
+    TextView days;
     @Inject
     MainPresenter presenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
     }
 
     @AfterViews
@@ -37,4 +42,7 @@ public class MainActivity extends BaseActivity {
                 .inject(this);
     }
 
+    public void showDays(String day) {
+        days.setText(day);
+    }
 }

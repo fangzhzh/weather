@@ -1,6 +1,7 @@
 apply plugin: 'com.android.application'
 apply plugin: 'com.neenbedankt.android-apt'
 apply plugin: 'com.frogermcs.androiddevmetrics'
+apply plugin: 'com.jakewharton.hugo'
 
 android {
     compileSdkVersion 24
@@ -19,6 +20,12 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    packagingOptions {
+        exclude 'META-INF/LICENSE.txt'
+        exclude 'META-INF/LICENSE'
+        exclude 'META-INF/NOTICE.txt'
+    }
+
 }
 ext.androidAnnotationsVersion = '4.1.0';
 
@@ -37,14 +44,22 @@ dependencies {
     compile 'javax.inject:javax.inject:1'
     testCompile 'junit:junit:4.12'
 
-    //Dagger 2
+    //google
     compile 'com.google.dagger:dagger:2.4'
     apt 'com.google.dagger:dagger-compiler:2.4'
+    compile 'com.google.guava:guava:19.0'
 
-
-    // rxjava
+    // ReactiveX
+    compile 'io.reactivex:rxandroid:1.2.1'
     compile 'io.reactivex:rxjava:1.2.1'
 
     // squareup
     compile 'com.squareup.okhttp:okhttp:2.5.0'
+
+    // utils
+    compile 'com.tickaroo.tikxml:annotation:0.6.4-SNAPSHOT'
+    compile 'com.tickaroo.tikxml:core:0.6.4-SNAPSHOT'
+
+    apt 'com.tickaroo.tikxml:processor:0.6.4-SNAPSHOT'
+
 }
