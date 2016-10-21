@@ -54,12 +54,16 @@ dependencies {
     compile 'io.reactivex:rxjava:1.2.1'
 
     // squareup
+    compile 'com.squareup.retrofit2:retrofit:2.0.2'
     compile 'com.squareup.okhttp:okhttp:2.5.0'
+    compile 'com.squareup.retrofit2:adapter-rxjava:2.0.2'
+    compile 'com.squareup.retrofit2:converter-gson:2.0.0'
+    compile ('com.squareup.retrofit2:converter-simplexml:2.0.0'){
+            exclude module: 'stax-api'
+            exclude module: 'stax'
+            exclude module: 'xpp3'
+        }
 
     // utils
-    compile 'com.tickaroo.tikxml:annotation:0.6.4-SNAPSHOT'
-    compile 'com.tickaroo.tikxml:core:0.6.4-SNAPSHOT'
-
-    apt 'com.tickaroo.tikxml:processor:0.6.4-SNAPSHOT'
 
 }

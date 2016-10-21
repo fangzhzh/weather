@@ -1,14 +1,15 @@
 package weather.fangzhzh.com.weather.ui.activity.presenter;
 
+import android.util.Log;
+
 import javax.inject.Inject;
 
 import rx.Observable;
-import rx.Observer;
 import rx.android.schedulers.AndroidSchedulers;
+import rx.functions.Action1;
 import rx.schedulers.Schedulers;
 import weather.fangzhzh.com.weather.data.api.WeatherManager;
-import weather.fangzhzh.com.weather.data.model.FourDays;
-import weather.fangzhzh.com.weather.data.model.FourDays.Temperature;
+import weather.fangzhzh.com.weather.data.model.FourDaysSimpleXml;
 import weather.fangzhzh.com.weather.ui.activity.MainActivity;
 
 /**
@@ -29,22 +30,15 @@ public class MainPresenter {
     }
 
     public void loadWeathers() {
-        Observable<Temperature> temperatureObservable = weatherManager.getFourDaysWeathers();
-        temperatureObservable.subscribe(new Observer<Temperature>() {
-            @Override
-            public void onCompleted() {
-            }
-
-            @Override
-            public void onError(Throwable e) {
-
-            }
-
-            @Override
-            public void onNext(Temperature temperature) {
-//                activity.setTemperatures();
-            }
-        });
+        Observable<FourDaysSimpleXml.Channel> fourDaysObservable = weatherManager.getFourDaysWeathers();
+        fourDaysObservable.subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Action1<FourDaysSimpleXml.Channel>() {
+                    @Override
+                    public void call(FourDaysSimpleXml.Channel fourDays) {
+                        Log.v(this.getClass().getSimpleName(), fourDays.toString());
+                    }
+                });
 
     }
 }

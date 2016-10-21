@@ -1,18 +1,16 @@
 package weather.fangzhzh.com.weather.data.model;
 
-import com.tickaroo.tikxml.annotation.*;
+
+import org.simpleframework.xml.*;
 
 import java.util.List;
-
-import hugo.weaving.DebugLog;
 
 /**
  * @author zhangzf
  * @since 18/10/16 4:59 PM
  */
-@DebugLog
-@Xml(name="fourdays")
-public class FourDays
+@Root
+public class FourDaysSimpleXml
 {
     public Channel channel;
 
@@ -22,13 +20,13 @@ public class FourDays
         return "ClassPojo [channel = "+channel+"]";
     }
 
-    @Xml(name="channel")
+    @Root(name="channel", strict = false)
     public static class Channel
     {
-        @PropertyElement
+        @Element
         public String title;
 
-        @PropertyElement
+        @Element
         public String source;
 
         @Element
@@ -41,10 +39,10 @@ public class FourDays
         }
     }
 
-    @Xml(name="item")
+    @Root
     public static class Item
     {
-        @PropertyElement
+        @Element
         public String title;
 
         @Element
@@ -60,7 +58,7 @@ public class FourDays
         }
     }
 
-    @Xml(name="forecastIssue")
+    @Root
     public static class ForecastIssue
     {
         @Attribute
@@ -77,43 +75,44 @@ public class FourDays
         }
     }
 
-    @Xml(name="weatherForecast")
+    @Root(strict = false)
     public static class WeatherForecast
     {
-        @Element
-        public List<Icon> icon;
+        @ElementList( entry = "day", inline = true)
+        public List<String> days;
 
-        @Element
-        public List<Wind> wind;
+        @ElementList(entry = "icon", inline = true)
+        public List<String> icons;
 
-        @Element
-        public List<RelativeHumidity> relativeHumidity;
+        @ElementList(entry = "wind", inline = true)
+        public List<Wind> winds;
 
-        @Element
-        public List<Forecast> forecast;
-//
-        @Element
-        public List<Day> days;
+        @ElementList(entry = "relativeHumidity", inline = true)
+        public List<RelativeHumidity> relativeHumiditys;
 
-        @Element
-        public List<Temperature> temperature;
+        @ElementList(entry = "forecast", inline = true)
+        public List<String> forecasts;
+
+
+        @ElementList(entry = "temperature", inline = true)
+        public List<Temperature> temperatures;
 
         @Override
         public String toString() {
             return "WeatherForecast{" +
-                    "icon=" + icon +
-                    ", wind=" + wind +
-                    ", relativeHumidity=" + relativeHumidity +
-                    ", forecast=" + forecast +
+                    "icon=" + icons +
+                    ", wind=" + winds +
+                    ", relativeHumidity=" + relativeHumiditys +
+                    ", forecast=" + forecasts +
                     ", day=" + days +
-                    ", temperature=" + temperature +
+                    ", temperature=" + temperatures +
                     '}';
         }
 
 
     }
 
-    @Xml(name="temperature")
+    @Root
     public static class Temperature
     {
         @Attribute
@@ -134,7 +133,7 @@ public class FourDays
         }
     }
 
-    @Xml(name="relativeHumidity")
+    @Root
     public static class RelativeHumidity
     {
         @Attribute
@@ -154,7 +153,7 @@ public class FourDays
     }
 
 
-    @Xml(name="wind")
+    @Root
     public static class Wind
     {
         @Attribute
@@ -169,46 +168,5 @@ public class FourDays
             return "ClassPojo [speed = "+speed+", direction = "+direction+"]";
         }
     }
-
-    @Xml(name="day")
-    public static class Day{
-        @TextContent
-        public String day;
-
-        @Override
-        public String toString() {
-            return "Day{" +
-                    "day='" + day + '\'' +
-                    '}';
-        }
-    }
-
-    @Xml(name="icon")
-    public static class Icon {
-        @TextContent
-        public String icon;
-
-        @Override
-        public String toString() {
-            return "Icon{" +
-                    "icon='" + icon + '\'' +
-                    '}';
-        }
-    }
-
-    @Xml(name="forecast")
-    public static class Forecast{
-        @TextContent
-        public String forecast;
-
-        @Override
-        public String toString() {
-            return "Forecast{" +
-                    "forecast='" + forecast + '\'' +
-                    '}';
-        }
-    }
-
-
 
 }
