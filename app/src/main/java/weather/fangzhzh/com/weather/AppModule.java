@@ -1,6 +1,7 @@
 package weather.fangzhzh.com.weather;
 
 import android.app.Application;
+import android.content.res.Resources;
 
 import com.squareup.okhttp.OkHttpClient;
 
@@ -35,5 +36,11 @@ public class AppModule {
         okhttpClient.setConnectTimeout(30, TimeUnit.SECONDS);
         return okhttpClient;
 
+    }
+
+    @Provides
+    @Singleton
+    public Resources provideResources() {
+        return application.getResources();
     }
 }

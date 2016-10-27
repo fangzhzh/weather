@@ -1,15 +1,19 @@
 package weather.fangzhzh.com.weather.ui.activity;
 
+import android.content.res.Resources;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.Nullable;
+import android.support.design.widget.TabLayout;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.view.GravityCompat;
+import android.support.v4.view.PagerAdapter;
+import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.EActivity;
@@ -23,18 +27,23 @@ import weather.fangzhzh.com.weather.WeatherApplication;
 import weather.fangzhzh.com.weather.ui.activity.module.MainActivityModule;
 import weather.fangzhzh.com.weather.ui.activity.presenter.MainPresenter;
 
-@EActivity(R.layout.activity_main1)
+@EActivity(R.layout.activity_main)
 public class MainActivity extends BaseActivity {
 
     @ViewById(R.id.drawer_layout)
     DrawerLayout drawerLayout;
     @ViewById(R.id.left_drawer)
     ListView drawerList;
-    @ViewById(R.id.days)
-    TextView days;
-    ActionBarDrawerToggle actionBarDrawerToggle;
+    @ViewById(R.id.view_paper)
+    ViewPager viewPager;
+    @ViewById(R.id.layout_tab)
+    TabLayout tabLayout;
     @Inject
     MainPresenter presenter;
+    @Inject
+    Resources resources;
+    PagerAdapter adapter;
+    ActionBarDrawerToggle actionBarDrawerToggle;
     private String[] drawerTitles;
     private String title;
     private String drawerTitle;
@@ -62,7 +71,6 @@ public class MainActivity extends BaseActivity {
             getActionBar().setHomeButtonEnabled(true);
         }
         drawerLayout.openDrawer(drawerList);
-        drawerLayout.isDrawerOpen(drawerList);
         actionBarDrawerToggle = new ActionBarDrawerToggle(
                 this,                  /* host Activity */
                 drawerLayout,         /* DrawerLayout object */
@@ -84,8 +92,16 @@ public class MainActivity extends BaseActivity {
         };
         drawerLayout.setDrawerListener(actionBarDrawerToggle);
         drawerList.setItemChecked(0, true);
-        actionBarDrawerToggle.syncState();
         drawerLayout.closeDrawer(drawerList);
+
+        // tab view
+        adapter = new WeatherPageAdapter(this, resources);
+        viewPager.setAdapter(adapter);
+        tabLayout.setupWithViewPager(viewPager);
+        tabLayout.setSelectedTabIndicatorColor(Color.YELLOW);
+        tabLayout.setTabMode(TabLayout.MODE_SCROLLABLE);
+        tabLayout.setTabTextColors(Color.BLACK, Color.WHITE);
+        actionBarDrawerToggle.syncState();
     }
 
     @AfterViews

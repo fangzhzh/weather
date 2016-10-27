@@ -12,5 +12,9 @@
 	</string-array>
 	<string name="drawer_open">Open navigation drawer</string>
 	<string name="drawer_close">Close navigation drawer</string>
+	<string name="twenty_four_hours">24 hours</string>
+	<string name="two_hours">2 Hours</string>
+	<string name="four_hours">4 hours</string>
+	<string name="pm_25_update">PM 2.5 Update</string>
 
 </resources>

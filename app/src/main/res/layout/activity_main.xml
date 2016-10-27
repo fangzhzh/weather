@@ -5,13 +5,24 @@
 	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
 	android:layout_height="match_parent">
-	<FrameLayout
+	<RelativeLayout
 		android:id="@+id/content_frame"
 		android:layout_width="match_parent"
 		android:layout_height="match_parent">
+		<android.support.design.widget.TabLayout
+			android:id="@+id/layout_tab"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+		/>
+		<android.support.v4.view.ViewPager
+			android:id="@+id/view_paper"
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			android:layout_below="@+id/layout_tab"
+		/>
 		<RelativeLayout
 			android:id="@+id/activity_main_layout"
-
+			android:visibility="gone"
 			android:layout_width="match_parent"
 			android:layout_height="match_parent"
 			android:paddingBottom="@dimen/activity_vertical_margin"
@@ -26,16 +37,11 @@
 				android:layout_height="wrap_content"
 				android:text="Hello World!"/>
 
-			<TextView
-				android:id="@+id/days"
-				android:layout_width="match_parent"
-				android:layout_height="wrap_content"
-				android:layout_below="@+id/hello"
-				android:text="Hello World asdfasd!"/>
 		</RelativeLayout>
-	</FrameLayout>
+	</RelativeLayout>
 	<!-- The navigation drawer -->
 	<ListView
+		android:listSelector="@drawable/drawer_list_selector"
 		android:id="@+id/left_drawer"
 		android:layout_width="240dp"
 		android:layout_height="match_parent"
